@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090a0d"><title>詭地圖｜1932 名字斷層</title><link rel="stylesheet" href="style.css"><style>
+.searchbox{background:#07090d;border:1px solid var(--line);padding:18px;border-radius:6px;margin:18px 0}.query{font:700 18px/1.5 var(--mono);color:var(--text);border-bottom:1px solid var(--line);padding-bottom:12px}.log{font:13px/1.9 var(--mono);color:var(--muted);min-height:120px;padding-top:12px}.hit{color:var(--gold);font-weight:900;font-size:24px}.zero{color:var(--red);font-weight:900}.stage{display:none}.stage.show{display:block}.choicegrid{display:grid;gap:9px;margin:14px 0}.choicegrid button{text-align:left;justify-content:flex-start}.choicegrid button.good{border-color:var(--gold);background:#d5b77916}.choicegrid button.bad{border-color:var(--red)}.paper{background:#eee8d9;color:#202226;border-radius:4px;padding:18px;margin:14px 0;font-family:"Noto Serif TC","Songti TC",serif}.paper .date{font:700 12px/1.4 var(--mono);color:#625d52}.paper .headline{font-size:21px;font-weight:900;margin:8px 0}.paper mark{background:#ffe066;padding:1px 3px}.lock{opacity:.35;pointer-events:none}.clue{border-left:3px solid var(--gold);padding-left:12px;margin:14px 0}.big-next{width:100%;font-size:16px;margin-top:14px}.mini{font-size:12px;color:var(--muted)}
+</style></head><body><main><header><div><div class="brand">詭地圖<span style="color:var(--red)">．</span></div><div class="badge">EP.01 移位之地</div></div><div class="meta mono">ARCHIVE SEARCH<br><span id="status">QUERY REQUIRED</span></div></header>
+<span class="badge">CASE 04 // 名字斷層</span><h1>1932，名字不見了</h1><p>你已鎖定舊市場街廓。現在不要讀答案——自己把「永和市場」往歷史裡追。</p>
+
+<div id="stage1" class="stage show">
+ <div class="panel"><b>檔案庫只允許一次關鍵字檢索。</b><p class="mini">你要找的是「今天這座市場，在1932年留下的痕跡」。你會輸入哪個詞？</p>
+ <div class="choicegrid" id="queries">
+  <button data-q="wrong">G08 景福宮站</button><button data-q="correct">永和市場</button><button data-q="wrong">青溪國小</button>
+ </div><div id="qfb" class="mono mini"></div></div>
+</div>
+
+<div id="stage2" class="stage">
+ <div class="searchbox"><div class="query">SEARCH › <span id="queryword">永和市場</span></div><div id="log" class="log"></div></div>
+ <div id="nohit" class="stage"><div class="panel"><div class="zero mono">NO EXACT MATCH // 1932</div><h2>奇怪。地點還在，名字卻斷了。</h2><p>如果「永和市場」不是當年的名字，你下一步應該追什麼？</p>
+ <div class="choicegrid" id="nextsearch"><button data-n="wrong">換一個完全不同的市場</button><button data-n="correct">沿著同一街廓，找1932年的市場名稱</button><button data-n="wrong">直接判定1932沒有市場</button></div><div id="nfb" class="mono mini"></div></div></div>
+</div>
+
+<div id="stage3" class="stage">
+ <div class="paper"><div class="date">ARCHIVE HIT · 1932</div><div class="headline">桃園消費市場</div><div>同期報刊線索指向市場開場。你追的不是另一座市場，而是同一條歷史脈絡中的<mark>另一個名稱</mark>。</div></div>
+ <div class="clue"><b>玩家發現：</b>「永和市場」一路追到1932，名稱會消失；接手線索的是「桃園消費市場」。</div>
+ <p><b>現在把兩件證物放進正確的證據盒：</b></p>
+ <div class="panel"><div class="evidence">EVIDENCE A · 1932 同期報刊線索</div><p>可支持：1932年「桃園消費市場」開場的歷史時間錨。</p><select id="evA"><option value="">選擇證據用途…</option><option value="time">時間／名稱</option><option value="gps">精確GIS座標</option><option value="pond">證明填平埤塘</option></select></div>
+ <div class="panel"><div class="evidence">EVIDENCE B · 1939《夜之素描》研究判讀</div><p>研究者依建築特徵認為可能描繪桃園街消費市場。</p><select id="evB"><option value="">選擇證據用途…</option><option value="academic">建築／主題的研究對應</option><option value="gps">精確GIS座標</option><option value="pond">證明填平埤塘</option></select></div>
+ <button id="check" class="primary big-next">封存證物 →</button><div id="efb" class="mono mini" style="margin-top:10px"></div>
+</div>
+
+<div id="stage4" class="stage"><div class="panel"><div class="evidence">NAME SHIFT // VERIFIED THREAD</div><div class="hit">永和市場 → 桃園消費市場</div><p>你已經把「名字」追到1932。可是更早的1920年代，連市場本身都還沒出現。</p></div><button class="primary big-next" onclick="mark('1932','verdict.html')">打開 1920 地圖：市場出現以前呢？ →</button></div>
+<footer class="mono">GHOST MAP / EP.01 · 名稱會移動，年代也會</footer></main><script src="app.js"></script><script>
+const $=id=>document.getElementById(id);function show(id){$(id).classList.add('show')}function msg(id,t){$(id).textContent=t}
+document.querySelectorAll('#queries button').forEach(b=>b.onclick=()=>{if(b.dataset.q==='correct'){b.classList.add('good');msg('qfb','QUERY ACCEPTED');$('status').textContent='SEARCHING';setTimeout(()=>{ $('stage1').classList.remove('show');show('stage2');runSearch();},180)}else{b.classList.add('bad');msg('qfb','這個詞無法回答「舊永和市場往前叫什麼」。再找一次。')}});
+function runSearch(){const rows=['2021  新永和市場 / 搬遷 ✓','1982  永和市場 / 第三代 ✓','1960s 永和商場 / 名稱偏移 …','1939  永和市場 / EXACT MATCH 0','1932  永和市場 / EXACT MATCH 0'];let i=0;$('log').innerHTML='';const t=setInterval(()=>{$('log').innerHTML+=rows[i++]+'<br>';if(i===rows.length){clearInterval(t);$('log').innerHTML+='<br><span class="zero">NO EXACT MATCH</span>';show('nohit');$('status').textContent='NAME LOST'}},90)}
+document.querySelectorAll('#nextsearch button').forEach(b=>b.onclick=()=>{if(b.dataset.n==='correct'){b.classList.add('good');msg('nfb','SEARCH STRATEGY ACCEPTED // SAME PLACE, OLDER NAME');setTimeout(()=>{$('stage2').classList.remove('show');show('stage3');$('status').textContent='ALTERNATE NAME FOUND'},180)}else{b.classList.add('bad');msg('nfb','地點線索不能丟掉。名字可能變，街廓才是追查主線。')}});
+$('check').onclick=()=>{if($('evA').value==='time'&&$('evB').value==='academic'){msg('efb','EVIDENCE BOUNDARY OK // 沒有把畫作當GPS，也沒有把後世「填埤」說法偷渡進來。');$('check').disabled=true;setTimeout(()=>show('stage4'),180)}else{msg('efb','證據越界。1932報刊線索不能直接證明池塘；《夜之素描》也不能提供精確GIS座標。')}};
+</script></body></html>

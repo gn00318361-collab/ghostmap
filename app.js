@@ -1,0 +1,1 @@
+const KEY="ghostmap_ep01_multipage";function save(k){let s=JSON.parse(localStorage.getItem(KEY)||"{}");s[k]=true;localStorage.setItem(KEY,JSON.stringify(s))}function mark(id,next){save(id);location.href=next}
